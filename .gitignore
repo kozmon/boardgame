@@ -1,0 +1,4 @@
+/docroot/mongo_start.sh
+/docroot/node_modules
+/docroot/data
+/npm-debug.log

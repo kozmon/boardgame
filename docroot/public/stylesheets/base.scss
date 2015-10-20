@@ -1,0 +1,121 @@
+$color00 : #ff8500;
+$color01 : #f78000;
+$color02 : #e98fe2;
+$color03 : #ffe100;
+$color04 : #f7d900;
+$color05 : #e9d32e;
+$color06 : #d80062;
+$color07 : #cf005e;
+$color08 : #c4276e;
+$color09 : #0478a4;
+$color10 : #01709b;
+$color11 : #227392;
+
+$black : #000000;
+$gray : #696969;
+$lightgray : #ccc;
+$dustywhite : #ccc;
+$linen: #faf0e6;
+$eerie: #1b1b1b;
+
+$basefont: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+@mixin asap($weight) {
+    font-family: 'Asap';
+    font-weight: $weight;
+}
+
+@mixin roboto-condensed($weight) {
+    font-family: 'Roboto Condensed';
+    font-weight: $weight;
+}
+
+@mixin border-radius ($radius) {
+    @include border-top-radius($radius);
+    @include border-bottom-radius($radius);
+}
+
+/******************************** BASE ********************************/
+
+/* for older browsers http://www.w3.org/wiki/HTML_structural_elements */
+article, section, aside, hgroup, nav, header, footer, figure, figcaption {
+    display: block;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {   
+    /*border-color: $color00;*/
+    border-color: $color04;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 127, 00, 0.6);
+    outline: 0 none;
+}
+
+h1 {
+    @include asap(400);
+    font-style: italic;
+    font-size: 2.4em;
+    color: $color03;
+}
+
+h2 {
+    @include roboto-condensed(300);
+    margin-left: 10px;
+    font-size: 2em;
+    color: $gray;
+    font-weight: normal;
+    border-bottom: 1px solid #c8c8c8;
+}
+
+h3 {
+    @include roboto-condensed(400);
+    margin-left: 20px;
+    font-size: 1.6em;
+    color: $gray;
+    font-weight: normal;
+    border-bottom: 1px solid #c8c8c8;
+}
+
+body {
+    @include roboto-condensed(300);
+    font-size: 1.2em;
+    line-height: 1.4em;
+}
+
+textarea {
+    resize: vertical;
+}
+
+label {
+    color: #888888;
+    font-weight: normal;
+    font-size: 1.4em;
+}
+
+p {
+    @include roboto-condensed(300);
+    font-size: 1.4em;
+    line-height: 1.4em;
+
+}
+
+a {
+    @include roboto-condensed(400);
+    font-size: 17px;
+    color: $gray;
+    cursor: pointer;
+}
+
