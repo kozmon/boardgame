@@ -194,8 +194,8 @@ var buildingTypes = {
     }
 };
     
-var cards = [0,1,2,3,4,0,1,2,3,4,1,2,3,4];
-var buildings = [0,1,2,3,4,0,1,2,3,4];
+var cards = [0,0,0,1,1,2,2,3,3,4,4];
+var buildings = [0,1,2,3,4,0,1,2,3,4,0,1,2,3,4,0,1,2,3,4];
 
 //var cellSize = $('.board').width() / board.width;
 var cardSize = 80;
@@ -218,13 +218,18 @@ function initBoard() {
 
 function initCards() {
     $('.stack-container .stack').each(function() {
-        for (var i=0;i<cards.length;i++) {
-            $(this).find('.cards')
-                .append($('<div class="card" data-rotation="0">' + cardTypes[cards[i]].name + '</div>')
+        var stack = this;
+
+        $(cards).each(function() {
+            var card = this;
+            var rotationCount = Object.keys(cardTypes[card].phases).length;
+            
+            $(stack).find('.cards')
+                .append($('<div class="card" data-rotation="0">' + cardTypes[card].name + '</div>')
                     .draggable({
                         snap: $('table.board').find('td'),
                         snapMode: "outer",
-                        snapTolerance: '5',
+                        snapTolerance: '10',
                         drag: function( event, ui ) {
                             $(this).css({ 'z-index': zindex++ });
                         }
@@ -232,30 +237,33 @@ function initCards() {
                     .css({
                         'width': cardSize + 'px',
                         'height': cardSize + 'px',
-                        'background-position-x':  cardTypes[cards[i]].phases[0].imgShiftX + 'px',
-                        'background-position-y':  cardTypes[cards[i]].phases[0].imgShiftY + 'px',
+                        'background-position-x': cardTypes[card].phases[0].imgShiftX + 'px',
+                        'background-position-y': cardTypes[card].phases[0].imgShiftY + 'px',
                         'z-index': zindex++
                     })
                     .click(function(e) {
                         var rotation = parseInt($(this).attr('data-rotation'));
-                        $(this).attr('data-rotation', (rotation < 3) ? rotation + 1 : 0);
+                        $(this).attr('data-rotation', (rotation < rotationCount - 1) ? rotation + 1 : 0);
                         $(this).css({
-                            'background-position-x':  cardTypes[cards[i]].phases[rotation].imgShiftX + 'px',
-                            'background-position-y':  cardTypes[cards[i]].phases[rotation].imgShiftY + 'px',
+                            'background-position-x':  cardTypes[card].phases[rotation].imgShiftX + 'px',
+                            'background-position-y':  cardTypes[card].phases[rotation].imgShiftY + 'px',
                             'z-index': zindex++
                         });
                     })
                 )
             ;
-        }
+        });
         
-        for (var i=0;i<buildings.length;i++) {
-            $(this).find('.buildings')
-                .append($('<div class="building">' + buildingTypes[buildings[i]].name + '</div>')
+        $(buildings).each(function() {
+            var building = this;
+            var rotationCount = Object.keys(buildingTypes[building].phases).length;
+            
+            $(stack).find('.buildings')
+                .append($('<div class="building" data-rotation="0">' + buildingTypes[building].name + '</div>')
                     .draggable({
                         snap: $('table.board').find('td'),
                         snapMode: "outer",
-                        snapTolerance: '5',
+                        snapTolerance: '10',
                         drag: function( event, ui ) {
                             $(this).css({ 'z-index': zindex++ });
                         }
@@ -263,23 +271,22 @@ function initCards() {
                     .css({
                         'width': cardSize + 'px',
                         'height': cardSize + 'px',
-                        'background-position-x':  buildingTypes[buildings[i]].phases[0].imgShiftX + 'px',
-                        'background-position-y':  buildingTypes[buildings[i]].phases[0].imgShiftY + 'px',
+                        'background-position-x': buildingTypes[building].phases[0].imgShiftX + 'px',
+                        'background-position-y': buildingTypes[building].phases[0].imgShiftY + 'px',
                         'z-index': zindex++
                     })
-                )
-                .mousedown(function(e) {
-                    if (e.which == 3) {
-                        var rotation = parseInt($(this).attr('data-rotation')) + 1;
-                        $(this).attr('data-rotation', (rotation >= 4) ? rotation : 0);
+                    .click(function(e) {
+                        var rotation = parseInt($(this).attr('data-rotation'));
+                        $(this).attr('data-rotation', (rotation < rotationCount - 1) ? rotation + 1 : 0);
                         $(this).css({
-                            'background-position-x':  cardTypes[cards[i]].phases[rotation].imgShiftX + 'px',
-                            'background-position-y':  cardTypes[cards[i]].phases[rotation].imgShiftY + 'px',
+                        'background-position-x': buildingTypes[building].phases[rotation].imgShiftX + 'px',
+                        'background-position-y': buildingTypes[building].phases[rotation].imgShiftY + 'px',
                             'z-index': zindex++
                         });
-                    }
-                })
+                    })
+                )
             ;
-        }
+        });
+        
     });
 }
