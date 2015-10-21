@@ -24,24 +24,24 @@
 .stack {
     margin-top: 10px;
     border: 1px solid #cccccc;
+}
     
-    .card {
-        float: left;
-        margin: 5px;
-        border: 1px solid #cccccc;
-        background-image: url('/images/cards_small.png');
-        background-repeat: no-repeat;
-        padding: 35px;
-    }
-    
-    .building {
-        float: left;
-        margin: 5px;
-        border: 1px solid #cccccc;
-        background-image: url('/images/buildings_small.png');
-        background-repeat: no-repeat;
-        padding: 35px;
-    }
+.card {
+    float: left;
+    margin: 2px;
+    border: 1px solid #cccccc;
+    background-image: url('/images/grounds.png');
+    background-repeat: no-repeat;
+    padding: 35px;
+}
+
+.building {
+    float: left;
+    margin: 5px;
+    border: 1px solid #cccccc;
+    background-image: url('/images/buildings_small.png');
+    background-repeat: no-repeat;
+    padding: 35px;
 }
 
 table.board {

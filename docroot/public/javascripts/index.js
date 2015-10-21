@@ -10,232 +10,22 @@ var board = {
     height: 9
 };
 
-var cardTypes = {
-    0: { 
-        name: '0',
-        phases: {
-            0: {
-                imgShiftX: -240,  
-                imgShiftY: -240
-            }
-        }
-    },
-    1: { 
-        name: '1',
-        phases: {
-            0: {
-                imgShiftX: -240,  
-                imgShiftY: -160
-            },
-            1: {
-                imgShiftX: 0,
-                imgShiftY: -240
-            },
-            2: {
-                imgShiftX: -80,  
-                imgShiftY: -240
-            },
-            3: {
-                imgShiftX: -160,  
-                imgShiftY: -240
-            }
-        }
-    },
-    2: { 
-        name: '2',
-        phases: {
-            0: {
-                imgShiftX: 0,
-                imgShiftY: -160
-            },
-            1: {
-                imgShiftX: -80,
-                imgShiftY: -160
-            },
-            2: {
-                imgShiftX: -80,
-                imgShiftY: -80
-            },
-            3: {
-                imgShiftX: -160,  
-                imgShiftY: -80
-            },
-            4: {
-                imgShiftX: -160,  
-                imgShiftY: -160
-            },
-            5: {
-                imgShiftX: -240,  
-                imgShiftY: -80
-            }
-        }
-    },
-    3: { 
-        name: '3',
-        phases: {
-            0: {
-                imgShiftX: -80,
-                imgShiftY: 0
-            },
-            1: {
-                imgShiftX: -160,
-                imgShiftY: 0
-            },
-            2: {
-                imgShiftX: -240,
-                imgShiftY: -0
-            },
-            3: {
-                imgShiftX: 0,  
-                imgShiftY: -80
-            }
-        }
-    },
-    4: { 
-        name: '4',
-        phases: {
-            0: {
-                imgShiftX: 0,
-                imgShiftY: 0
-            }
-        }
-    },
-    5: { 
-        name: '5',
-        phases: {
-            0: {
-                imgShiftX: 0,
-                imgShiftY: -320
-            },
-            1: {
-                imgShiftX: -160,
-                imgShiftY: -400
-            }
-        }
-    },
-    6: { 
-        name: '6',
-        phases: {
-            0: {
-                imgShiftX: -80,
-                imgShiftY: -320
-            }
-        }
-    },
-    7: { 
-        name: '7',
-        phases: {
-            0: {
-                imgShiftX: -160,
-                imgShiftY: -320
-            }
-        }
-    },
-    8: { 
-        name: '8',
-        phases: {
-            0: {
-                imgShiftX: 0,
-                imgShiftY: -400
-            }
-        }
-    }
+var groundFile = {
+    width: 6,
+    height: 9
 };
-    
-var buildingTypes = {
-    0: { 
-        name: '0',
-        phases: {
-            0: {
-                imgShiftX: -240,  
-                imgShiftY: -240
-            }
-        }
-    },
-    1: { 
-        name: '1',
-        phases: {
-            0: {
-                imgShiftX: -240,  
-                imgShiftY: -160
-            },
-            1: {
-                imgShiftX: 0,
-                imgShiftY: -240
-            },
-            2: {
-                imgShiftX: -80,  
-                imgShiftY: -240
-            },
-            3: {
-                imgShiftX: -160,  
-                imgShiftY: -240
-            }
-        }
-    },
-    2: { 
-        name: '2',
-        phases: {
-            0: {
-                imgShiftX: 0,
-                imgShiftY: -160
-            },
-            1: {
-                imgShiftX: -80,
-                imgShiftY: -160
-            },
-            2: {
-                imgShiftX: -80,
-                imgShiftY: -80
-            },
-            3: {
-                imgShiftX: -160,  
-                imgShiftY: -80
-            },
-            4: {
-                imgShiftX: -160,  
-                imgShiftY: -160
-            },
-            5: {
-                imgShiftX: -240,  
-                imgShiftY: -80
-            }
-        }
-    },
-    3: { 
-        name: '3',
-        phases: {
-            0: {
-                imgShiftX: -80,
-                imgShiftY: 0
-            },
-            1: {
-                imgShiftX: -160,
-                imgShiftY: 0
-            },
-            2: {
-                imgShiftX: -240,
-                imgShiftY: -0
-            },
-            3: {
-                imgShiftX: 0,  
-                imgShiftY: -80
-            }
-        }
-    },
-    4: { 
-        name: '4',
-        phases: {
-            0: {
-                imgShiftX: 0,
-                imgShiftY: 0
-            }
-        }
-    }
+
+var buildingFile = {
+    width: 4,
+    height: 8
 };
+
+var cardTypes = {};
+
+var buildingTypes = {};
     
-var cards = [0,1,2,3,4,5,6,7,8];
-var buildings = [0,1,2,3,4,0,1,2,3,4,0,1,2,3,4,0,1,2,3,4];
+var cards = [0];
+var buildings = [0];
 
 //var cellSize = $('.board').width() / board.width;
 var cardSize = 80;
@@ -252,11 +42,52 @@ function initBoard() {
                 'width': cardSize + 'px',
                 'height': cardSize + 'px'
             });
+            $(cell).droppable({
+                accept: ".card, .building",
+                activeClass: "ui-state-highlight",
+                drop: function( event, ui ) {
+                    // clone item to retain in original "list"
+                    var item = ui.draggable.clone();
+                    $(this).addClass('has-drop').html(item);
+                }
+            });
         }
-    }
+    }    
 }
 
 function initCards() {
+    var ctn = 0;
+    cardTypes[0] = {
+        'name': 0,
+        phases: {
+        }
+    };
+    for (var i=0;i<groundFile.width;i++) {
+        for (var j=0;j<groundFile.height;j++) {
+            cardTypes[0].phases[ctn] = {
+                'imgShiftX': i*(-80),
+                'imgShiftY': j*(-80)
+            };
+            ctn++;
+        }
+    }
+
+    ctn = 0;
+    buildingTypes[0] = {
+        'name': 0,
+        phases: {
+        }
+    };
+    for (var i=0;i<buildingFile.width;i++) {
+        for (var j=0;j<buildingFile.height;j++) {
+            buildingTypes[0].phases[ctn] = {
+                'imgShiftX': i*(-80),
+                'imgShiftY': j*(-80)
+            };
+            ctn++;
+        }
+    }
+
     $('.stack-container .stack').each(function() {
         var stack = this;
 
@@ -272,7 +103,10 @@ function initCards() {
                         snapTolerance: '20',
                         drag: function( event, ui ) {
                             $(this).css({ 'z-index': zindex++ });
-                        }
+                        },
+                        helper: "clone",
+                        cursor: "move",
+                        revertDuration: 0
                     })
                     .css({
                         'width': cardSize + 'px',
@@ -302,11 +136,14 @@ function initCards() {
                 .append($('<div class="building" data-rotation="0">' + buildingTypes[building].name + '</div>')
                     .draggable({
                         snap: $('table.board').find('td'),
-                        snapMode: "outer",
-                        snapTolerance: '10',
+                        snapMode: "inner",
+                        snapTolerance: '20',
                         drag: function( event, ui ) {
                             $(this).css({ 'z-index': zindex++ });
-                        }
+                        },
+                        helper: "clone",
+                        cursor: "move",
+                        revertDuration: 0
                     })
                     .css({
                         'width': cardSize + 'px',
