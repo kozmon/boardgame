@@ -99,6 +99,46 @@ var cardTypes = {
                 imgShiftY: 0
             }
         }
+    },
+    5: { 
+        name: '5',
+        phases: {
+            0: {
+                imgShiftX: 0,
+                imgShiftY: -320
+            },
+            1: {
+                imgShiftX: -160,
+                imgShiftY: -400
+            }
+        }
+    },
+    6: { 
+        name: '6',
+        phases: {
+            0: {
+                imgShiftX: -80,
+                imgShiftY: -320
+            }
+        }
+    },
+    7: { 
+        name: '7',
+        phases: {
+            0: {
+                imgShiftX: -160,
+                imgShiftY: -320
+            }
+        }
+    },
+    8: { 
+        name: '8',
+        phases: {
+            0: {
+                imgShiftX: 0,
+                imgShiftY: -400
+            }
+        }
     }
 };
     
@@ -194,7 +234,7 @@ var buildingTypes = {
     }
 };
     
-var cards = [0,0,0,1,1,2,2,3,3,4,4];
+var cards = [0,1,2,3,4,5,6,7,8];
 var buildings = [0,1,2,3,4,0,1,2,3,4,0,1,2,3,4,0,1,2,3,4];
 
 //var cellSize = $('.board').width() / board.width;
@@ -228,8 +268,8 @@ function initCards() {
                 .append($('<div class="card" data-rotation="0">' + cardTypes[card].name + '</div>')
                     .draggable({
                         snap: $('table.board').find('td'),
-                        snapMode: "outer",
-                        snapTolerance: '10',
+                        snapMode: "inner",
+                        snapTolerance: '20',
                         drag: function( event, ui ) {
                             $(this).css({ 'z-index': zindex++ });
                         }
