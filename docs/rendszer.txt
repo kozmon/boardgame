@@ -1,0 +1,34 @@
+Egy elképzelt körzet alkalmazni kezdte az új rendszert. Ezen új rendszernek jellemzése következik:
+
+megjegyzések: 
+- a paraméterként jelölt fogalmak
+    - mennyisége, mértéke vagy szavazás típusú projektjavaslatnak, vagy egyéb paraméterek kombinációjának függvénye
+    - lehetnek 0-100% közötti értékek is, ami akár azt is jelentheti, hogy egyáltalán nem veszik számításba
+
+Területekre van felosztva a teljes körzet. Ez a körzet lehet többek közt egy lakóközösség, egy város, egy ország (paraméter) - lényegében maga a körzet is egy terület. 
+Ezek a területek 
+- lehetnek országok, azokon belül megyék, városok, városrészek, utcák és egyebek
+- nem feltétlenül alkotnak földrajzilag egységes területet
+- hierarchikus viszonyban állnak egymással
+Az egyes személyek tagjai tetszőleges számú területnek (paraméter). 
+Minden személynek joga van:
+- minden olyan területnek az ügyeiben véleményt nyilvánítania, amelynek tagja (paraméter)
+- minden olyan területen az ügyeiben felszólalnia, projektjavaslatot tennie, amelynek tagja (paraméter)
+- minden olyan projektjavaslatra véleményt formálnia, ami őt is érinti valamilyen formában (paraméter)
+megjegyzés: a véleményformálás, véleménynyilvánítás többek közt szavazást is jelenthet
+Egy projektjavaslat megszavazása esetén azt az abban leírtaknak megfelelően, a megadott szereplők közreműködésével, illetve  
+a megvalósításához szükséges további projektjavaslatok indítványozásával kell végrehajtani. 
+A végre nem hajtott, vagy nem a jóváhagyott módon végrehajtott projekt által okozott károkért az annak esetleges okozóit 
+a terület szabályai szerint meghatározott módon vonják felelősségre (paraméter). Ez történhet a vele hierarchikus viszonyban 
+lévő másik terület szabályainak a kombinálásával is (paraméter).
+
+Minden társadalmi rendszer - beleértve a 20. századi és 21. század eleji demokráciákat is - eleget tesz egy-egy ilyen körzetnek, 
+azzal a sajátossággal, hogy az esetek meglehetősen nagy hányadában nulla vagy ahhoz nagyon közeli értékű paraméterekkel bír, azaz 
+a személyek többségének nagyon kevés ügyben, nagyon nagy időközönként van lehetősége véleményt nyílvánítani.
+
+Példa lehet projektjavaslatra egy utca újraaszfaltozása, vagy egy játszótér, iskola, metróhálózat építése, iskola- vagy nyugdíjrenszer 
+változtatása, különböző törvények módosítása, meghozása. Az érintettek meghatározása és azok véleménynyilvánítási minősége különböző 
+paraméterek alapján történik. Egy projektjavaslat tartalmazza:
+- a szükséges erőforrások meghatározását
+- a várható eredmények és hatások leírását
+- a becsült végrehajtási időt
